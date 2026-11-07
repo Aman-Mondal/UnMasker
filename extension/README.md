@@ -25,8 +25,10 @@ A lightweight browser companion that scans the active tab in real-time with one 
 
 1. Ensure the UnMasker backend is running:
    ```bash
-   python app.py
-   # Or run_unmasker.bat (http://127.0.0.1:5000)
+   start_unmasker.bat
+   # Or manually:
+   # Terminal 1: python python_service/app.py (Port 5001)
+   # Terminal 2: node server/index.js (Port 5000)
    ```
 2. Navigate to any website in your browser (e.g. `https://sbi-secure-login.com` or `https://python.org`).
 3. Click the **UnMasker** extension icon in your browser toolbar.
