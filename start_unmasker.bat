@@ -9,7 +9,7 @@ echo =======================================================
 echo.
 
 echo [1/4] Freeing ports 5000 and 5001 from any background processes...
-powershell -NoProfile -Command "$ports = @(5000, 5001); foreach ($p in $ports) { $conn = Get-NetTCPConnection -LocalPort $p -ErrorAction SilentlyContinue; if ($conn) { $conn.OwningProcess | Select-Object -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } } }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$ports = @(5000, 5001); foreach ($p in $ports) { $conn = Get-NetTCPConnection -LocalPort $p -ErrorAction SilentlyContinue; if ($conn) { $conn.OwningProcess | Select-Object -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } } }"
 
 echo [2/4] Starting Python Security Analysis Engine (Port 5001)...
 start "UnMasker - Python Engine (Port 5001)" cmd /k "title UnMasker Python Engine && cd /d "%~dp0" && python python_service/app.py"
