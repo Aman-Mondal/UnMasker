@@ -65,28 +65,44 @@ UnMasker separates backend responsibilities into two independent, scalable servi
 
 ## 🚀 Quick Start Guide
 
-### Option 1: One-Click Launch (Windows)
+### Step 1: Clone & Install (First Time Only)
+```bash
+# Clone the repository and checkout branch
+git clone -b UnMasker-type-1 https://github.com/Aman-Mondal/UnMasker.git
+cd UnMasker
+
+# Copy environment template
+copy .env.example .env
+
+# Install Node & Python dependencies
+npm run install:all
+pip install -r requirements.txt
+```
+
+### Step 2: Launch Application
+
+#### Option 1: One-Click Launch (Windows)
 Double-click `start_unmasker.bat` (or run `.\start_unmasker.ps1` in PowerShell).
 The application will open automatically in your browser at:
 ```
 http://127.0.0.1:5000
 ```
 
-### Option 2: Manual Startup (Two Terminals)
+#### Option 2: Manual Startup (Two Terminals)
 
-#### Terminal 1 — Python Security Engine (Port 5001)
+**Terminal 1 — Python Security Engine (Port 5001):**
 ```bash
 python python_service/app.py
 ```
 
-#### Terminal 2 — Node.js Express Gateway (Port 5000)
+**Terminal 2 — Node.js Express Gateway (Port 5000):**
 ```bash
 node server/index.js
 ```
 
 ---
 
-## 🧪 Verified Benchmark Targets
+## 🧪 Verified Benchmark Targets (21 / 21 Passing)
 
 | Target URL | Expected Result | Score | Detection Rationale |
 |:---|:---|:---:|:---|
@@ -106,7 +122,7 @@ node server/index.js
 Run the test suites directly from `UnMasker`:
 
 ```bash
-# 1. Real Genuine & Fraud Benchmark Suite (19 target URLs)
+# 1. Real Genuine & Fraud Benchmark Suite (21 target URLs)
 python tests/test_real_urls.py
 
 # 2. End-to-End System Integration Suite (Auth, Stats, Scans, Reports)

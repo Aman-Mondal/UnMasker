@@ -1,0 +1,50 @@
+# UnMasker - Git Ignore Configuration
+
+# Dependencies (Never commit node_modules)
+node_modules/
+client/node_modules/
+server/node_modules/
+package-lock.json
+
+# Python compiled bytecode & virtual environments
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Environment Variables & Local Secrets
+.env
+.env.local
+.env.*.local
+
+# Local Database Stores & Session Data
+server/data/local_store.json
+
+# Logs & Debug Output
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor Directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
