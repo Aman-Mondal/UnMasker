@@ -1,0 +1,26 @@
+{
+  "name": "unmasker_security_scanner",
+  "version": "2.0.0",
+  "description": "UnMasker – AI-Powered Digital Trust & Web Threat Intelligence Platform",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "python": "python python_service/app.py",
+    "build:client": "npm --prefix client run build",
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "test": "python tests/test_unmasker.py",
+    "test:benchmark": "python tests/test_real_urls.py",
+    "test:e2e": "python tests/verify_e2e.py"
+  },
+  "keywords": [
+    "cybersecurity",
+    "threat-intelligence",
+    "phishing-detection",
+    "digital-trust",
+    "typosquatting",
+    "ssl-validation"
+  ],
+  "author": "UnMasker Team",
+  "license": "ISC",
+  "type": "commonjs"
+}

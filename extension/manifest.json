@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "UnMasker – AI Website Trust Inspector",
+  "version": "1.0.0",
+  "description": "Instant multi-layered website trust evaluation, phishing detection, and SSL verification powered by UnMasker.",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*",
+    "http://localhost:5000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Inspect with UnMasker"
+  }
+}
