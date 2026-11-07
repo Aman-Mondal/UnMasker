@@ -8,7 +8,9 @@
     "python": "python python_service/app.py",
     "build:client": "npm --prefix client run build",
     "install:all": "npm --prefix server install && npm --prefix client install",
-    "test": "node -e \"console.log('UnMasker test suite ready')\""
+    "test": "python tests/test_unmasker.py",
+    "test:benchmark": "python tests/test_real_urls.py",
+    "test:e2e": "python tests/verify_e2e.py"
   },
   "keywords": [
     "cybersecurity",
