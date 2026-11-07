@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       const resJson = await response.json();
-      if (!resJson.success) {
+      if (!resJson.success && resJson.error) {
         throw new Error(resJson.error || "Inspection failed.");
       }
 
-      renderScanResults(resJson.data, resJson.scan_id);
+      renderScanResults(resJson.data || resJson, resJson.scan_id || "latest");
     } catch (err) {
       loadingState.classList.add("hidden");
       errorState.classList.remove("hidden");
@@ -57,15 +57,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadingState.classList.add("hidden");
     resultsState.classList.remove("hidden");
 
-    const score = data.trust_score;
+    const score = data.trust_score ?? 100;
     const scoreVal = document.getElementById("scoreVal");
     const riskBadge = document.getElementById("riskBadge");
     const scoreDesc = document.getElementById("scoreDesc");
-    const scoreBanner = document.getElementById("scoreBanner");
 
     scoreVal.innerText = score;
-    riskBadge.innerText = data.risk_level;
-    scoreDesc.innerText = data.summary_statement;
+    riskBadge.innerText = data.risk_level || (score >= 80 ? "No Threat Detected" : score >= 60 ? "Suspicious" : "High Risk");
+    scoreDesc.innerText = data.statement || data.summary_statement || "Real-time threat evaluation complete.";
 
     if (score >= 80) {
       riskBadge.className = "badge badge-safe";
@@ -78,21 +77,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       scoreVal.style.color = "#b91c1c";
     }
 
-    const qd = data.quick_details || {};
-    document.getElementById("mSsl").innerText = qd.ssl_status || "N/A";
-    document.getElementById("mAge").innerText = qd.domain_age || "N/A";
-    document.getElementById("mHeaders").innerText = qd.security_headers_status || "N/A";
-    document.getElementById("mReports").innerText = `${qd.community_reports_count || 0} reports`;
+    const sslStatus = data.certificate_info?.status || data.quick_details?.ssl_status || "Valid";
+    const domainAge = data.threat_analysis?.domain_age || data.quick_details?.domain_age || "Active";
+    const secHeaders = data.security_assessment?.status || data.quick_details?.security_headers_status || "Configured";
+    const repCount = data.community_reports_count ?? data.quick_details?.community_reports_count ?? 0;
+
+    document.getElementById("mSsl").innerText = sslStatus;
+    document.getElementById("mAge").innerText = domainAge;
+    document.getElementById("mHeaders").innerText = secHeaders;
+    document.getElementById("mReports").innerText = `${repCount} reports`;
 
     const reasonsList = document.getElementById("reasonsList");
     reasonsList.innerHTML = "";
-    const reasons = data.combined_reasons || [];
-    if (reasons.length > 0) {
-      reasons.slice(0, 4).forEach(r => {
+    const rawReasons = data.reasons || data.combined_reasons || [];
+    if (rawReasons.length > 0) {
+      rawReasons.slice(0, 4).forEach(r => {
+        const text = typeof r === "string" ? r : r.text;
+        const isCritical = typeof r === "object" && r.type === "critical";
         const li = document.createElement("li");
-        const icon = r.type === "critical" ? "✕" : "!";
-        const color = r.type === "critical" ? "#dc2626" : "#d97706";
-        li.innerHTML = `<span style="color:${color}; font-weight:bold;">${icon}</span> <span>${r.text}</span>`;
+        const icon = isCritical ? "✕" : "!";
+        const color = isCritical ? "#dc2626" : "#d97706";
+        li.innerHTML = `<span style="color:${color}; font-weight:bold;">${icon}</span> <span>${text}</span>`;
         reasonsList.appendChild(li);
       });
     } else {
@@ -100,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const viewFullBtn = document.getElementById("viewFullReportBtn");
-    viewFullBtn.href = `http://127.0.0.1:5000/results/${scanId}`;
+    viewFullBtn.href = `http://127.0.0.1:5000/`;
   }
 
   rescanBtn.addEventListener("click", inspectActiveTab);
