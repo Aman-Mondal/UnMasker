@@ -2,6 +2,7 @@ import ipaddress
 import socket
 from urllib.parse import urlparse
 from flask import Flask, request, jsonify
+import os
 
 import config
 import threat_analysis
@@ -154,4 +155,5 @@ def analyze_url():
 
 if __name__ == "__main__":
     print(f"Starting UnMasker Python Security API on port {config.PORT}...")
-    app.run(host="127.0.0.1", port=config.PORT, debug=False, threaded=True)
+    port = int(os.environ.get("PORT", config.PORT))
+    app.run(host="0.0.0.0", port=port, debug=False, threaded=True)
