@@ -14,34 +14,52 @@ export default function AuthModal({
 }) {
   if (!authModalOpen) return null;
 
+
   return (
     <div className="modal-overlay" onClick={() => setAuthModalOpen(false)}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div style={{ display: 'flex', gap: '1rem', borderBottom: '1px solid var(--border)', marginBottom: '1.25rem' }}>
+      <div
+        className="modal-content auth-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="auth-header">
+          <div className="auth-icon">
+            🛡️
+          </div>
+          <h2>{authMode === 'register' ? 'Create your account' : 'Welcome back'}</h2>
+          <p>
+            {authMode === 'register'
+              ? 'Join UnMasker and take control of your digital safety.'
+              : 'Sign in to continue to UnMasker.'}
+          </p>
+        </div>
+
+        <div className="auth-tabs">
           <button
-            style={{ background: 'none', border: 'none', padding: '0.5rem 0', fontWeight: 700, color: authMode === 'login' ? 'var(--primary)' : 'var(--text-muted)', borderBottom: authMode === 'login' ? '2px solid var(--primary)' : 'none', cursor: 'pointer' }}
+            className={authMode === 'login' ? 'auth-tab active' : 'auth-tab'}
             onClick={() => { setAuthMode('login'); setAuthError(''); }}
+            type="button"
           >
             Sign In
           </button>
           <button
-            style={{ background: 'none', border: 'none', padding: '0.5rem 0', fontWeight: 700, color: authMode === 'register' ? 'var(--primary)' : 'var(--text-muted)', borderBottom: authMode === 'register' ? '2px solid var(--primary)' : 'none', cursor: 'pointer' }}
+            className={authMode === 'register' ? 'auth-tab active' : 'auth-tab'}
             onClick={() => { setAuthMode('register'); setAuthError(''); }}
+            type="button"
           >
-            Register
+            Create Account
           </button>
         </div>
 
         {authError && (
-          <div style={{ padding: '0.5rem 0.75rem', background: 'var(--danger-bg)', color: 'var(--danger-text)', borderRadius: '6px', fontSize: '0.85rem', marginBottom: '1rem' }}>
+          <div className="auth-error">
             {authError}
           </div>
         )}
 
-        <form onSubmit={handleAuthSubmit}>
+        <form onSubmit={handleAuthSubmit} className="auth-form">
           {authMode === 'register' && (
-            <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Full Name</label>
+            <div className="auth-field">
+              <label>Full Name</label>
               <input
                 type="text"
                 className="input-field"
@@ -53,31 +71,41 @@ export default function AuthModal({
             </div>
           )}
 
-          <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Email Address</label>
-          <input
-            type="email"
-            className="input-field"
-            placeholder="name@example.com"
-            value={authForm.email}
-            onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
-            required
-          />
+          <div className="auth-field">
+            <label>Email Address</label>
+            <input
+              type="email"
+              className="input-field"
+              placeholder="name@example.com"
+              value={authForm.email}
+              onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
+              required
+            />
+          </div>
 
-          <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Password</label>
-          <input
-            type="password"
-            className="input-field"
-            placeholder="••••••••"
-            value={authForm.password}
-            onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
-            required
-          />
+          <div className="auth-field">
+            <label>Password</label>
+            <input
+              type="password"
+              className="input-field"
+              placeholder="Enter your password"
+              value={authForm.password}
+              onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
+              required
+            />
+          </div>
 
-          <button type="submit" className="btn-pill" style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}>
+          <button type="submit" className="btn-pill auth-submit">
             {authMode === 'register' ? 'Create Account' : 'Sign In'}
+            <span>→</span>
           </button>
         </form>
+
+        <div className="auth-footer">
+          <span>🛡️</span> Your security matters. Your credentials are protected.
+        </div>
       </div>
     </div>
   );
+
 }
