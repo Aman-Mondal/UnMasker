@@ -261,17 +261,13 @@ export default function App() {
             {user ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                 <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>{user.name}</span>
-                <button className="btn-icon" onClick={handleLogout} title="Log Out"><LogOut size={16} /></button>
+                <button className="btn-icon" onClick={handleLogout} title="Log Out"><LogOut size={16} />Logout</button>
               </div>
             ) : (
               <button className="btn-pill" style={{ backgroundColor: 'var(--bg-subtle)', color: 'var(--text-main)', border: '1px solid var(--border)' }} onClick={() => { setAuthMode('login'); setAuthModalOpen(true); }}>
-                <LogIn size={15} /> Sign In
+                <LogIn size={15} /> Login
               </button>
             )}
-
-            <button className="btn-pill" onClick={() => setReportModalOpen(true)}>
-              <Flag size={15} /> Report URL
-            </button>
           </div>
         </div>
       </header>
