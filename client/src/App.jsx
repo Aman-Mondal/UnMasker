@@ -251,7 +251,6 @@ export default function App() {
             <button className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`} onClick={() => setActivePage('dashboard')}>Dashboard</button>
             <button className={`nav-item ${activePage === 'intel' ? 'active' : ''}`} onClick={() => setActivePage('intel')}>Threat Intel</button>
             <button className={`nav-item ${activePage === 'history' ? 'active' : ''}`} onClick={() => setActivePage('history')}>History</button>
-            <button className={`nav-item ${activePage === 'about' ? 'active' : ''}`} onClick={() => setActivePage('about')}>About</button>
           </nav>
 
           <div className="nav-actions">
@@ -894,7 +893,7 @@ export default function App() {
         )}
 
         {/* VIEW: ABOUT */}
-        {activePage === 'about' && (
+        {activePage === 'home' && (
           <div>
             <div className="card" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '2rem', alignItems: 'center', marginBottom: '2rem' }}>
               <div>

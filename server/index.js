@@ -69,9 +69,3 @@ app.get('*', (req, res) => {
     }
   });
 });
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[UnMasker] Node.js Express server running on http://127.0.0.1:${PORT}`);
-});
-
-
