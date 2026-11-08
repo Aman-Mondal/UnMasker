@@ -1,4 +1,7 @@
 {
+  "engines" :{
+    "node": "24.18.0"
+  },
   "name": "unmasker-client",
   "private": true,
   "version": "2.0.0",
