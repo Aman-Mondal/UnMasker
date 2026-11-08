@@ -85,9 +85,10 @@ button {
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.85rem 1.5rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.85rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -187,9 +188,10 @@ button {
 
 /* Layout */
 .main-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 2.5rem 3rem 4rem;
 }
 
 /* Hero Section */
