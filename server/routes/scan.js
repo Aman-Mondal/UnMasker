@@ -19,7 +19,7 @@ router.post('/', optionalAuth, async (req, res) => {
     // Call Python Analysis API
     let pythonResponse;
     try {
-      pythonResponse = await axios.post(`${PYTHON_API_URL}/analyze`, { url }, { timeout: 30000 });
+      pythonResponse = await axios.post(`${PYTHON_API_URL}/analyze`, { url });
     } catch (pyErr) {
       const msg = pyErr.response?.data?.error || pyErr.message;
       return res.status(502).json({ 
