@@ -1,3 +1,5 @@
+import Navbar from './components/layout/Navbar';
+
 import React, { useState, useEffect } from 'react';
 import {
   Shield, ShieldAlert, ShieldCheck, Search, Link as LinkIcon,
@@ -68,14 +70,14 @@ export default function App() {
             handleLogout();
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     } else {
       fetch('/api/stats')
         .then(res => res.json())
         .then(data => {
           if (data.success && data.stats) setStats(data.stats);
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [token]);
 
@@ -87,7 +89,7 @@ export default function App() {
         .then(data => {
           if (data.success) setReports(data.reports);
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [activePage]);
 
@@ -200,7 +202,7 @@ export default function App() {
         setStats(data.stats);
         showToast('Navigation blocked. Protection statistics updated!', 'success');
       }
-    } catch (_) {}
+    } catch (_) { }
   };
 
   const handleReportSubmit = async (e) => {
@@ -235,42 +237,16 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Top Navbar */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="brand" onClick={() => setActivePage('home')}>
-            <div className="brand-icon">
-              <Shield size={20} />
-            </div>
-            <div>
-              <span className="brand-text">UnMasker</span>
-            </div>
-          </div>
-
-          <nav className="nav-links">
-            <button className={`nav-item ${activePage === 'home' ? 'active' : ''}`} onClick={() => setActivePage('home')}>Home</button>
-            <button className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`} onClick={() => setActivePage('dashboard')}>Dashboard</button>
-            <button className={`nav-item ${activePage === 'intel' ? 'active' : ''}`} onClick={() => setActivePage('intel')}>Threat Intel</button>
-            <button className={`nav-item ${activePage === 'history' ? 'active' : ''}`} onClick={() => setActivePage('history')}>History</button>
-          </nav>
-
-          <div className="nav-actions">
-            <button className="btn-icon" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} title="Toggle Theme">
-              {theme === 'light' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
-            {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>{user.name}</span>
-                <button className="btn-icon" onClick={handleLogout} title="Log Out"><LogOut size={16} />Logout</button>
-              </div>
-            ) : (
-              <button className="btn-pill" style={{ backgroundColor: 'var(--bg-subtle)', color: 'var(--text-main)', border: '1px solid var(--border)' }} onClick={() => { setAuthMode('login'); setAuthModalOpen(true); }}>
-                <LogIn size={15} /> Login
-              </button>
-            )}
-          </div>
-        </div>
-      </header>
+      <Navbar
+        activePage={activePage}
+        setActivePage={setActivePage}
+        theme={theme}
+        setTheme={setTheme}
+        user={user}
+        handleLogout={handleLogout}
+        setAuthMode={setAuthMode}
+        setAuthModalOpen={setAuthModalOpen}
+      />
 
       {/* Main Content */}
       <main className="main-wrapper">
