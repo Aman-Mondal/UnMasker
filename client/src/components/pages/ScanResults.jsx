@@ -27,9 +27,7 @@ export default function ScanResults({
     <div>
       <div className="results-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <button style={{ background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }} onClick={() => setActivePage('home')}>
-            &larr; Scan Result
-          </button>
+          <h3 style={{border: 'none', color: 'var(--primary)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }}>Scan Result</h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <Globe size={20} color="var(--primary)" />
             <a href={scanResult.url} target="_blank" rel="noopener noreferrer" className="mono" style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
@@ -243,6 +241,9 @@ export default function ScanResults({
           </div>
         </div>
       )}
+      <button style={{ background: 'var(--primary)', border: 'none', color: 'var(--primary-light)', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }} onClick={() => setActivePage('home')}>
+        &larr; Scan Another URL
+      </button>
     </div>
   );
 }
