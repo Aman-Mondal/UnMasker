@@ -2,6 +2,23 @@
 
 > **Tagline:** *See Beyond the Surface.*
 
+## Hosted Demo & Troubleshooting
+
+- **Main application:** https://unmasker.onrender.com
+- **Python security analysis service:** https://unmasker-python.onrender.com
+
+### If scanning fails or a Python service error appears
+
+The main website depends on the separate Python security analysis service. If a scan fails, the backend reports an error, or you see a Python-related error:
+
+1. Open the Python service directly: https://unmasker-python.onrender.com
+2. Wait for the service to respond. If it is starting from an idle state, give it a little time to wake up.
+3. Return to the main application: https://unmasker.onrender.com
+4. Refresh the page and try the URL scan again.
+
+If the issue continues, the hosted service may be temporarily unavailable. Try again later.
+
+
 UnMasker is an independent, lightweight web security analysis system designed to evaluate the safety, authenticity, and digital trust of URLs. It detects phishing campaigns, brand impersonation, deceptive homoglyph domains, SSL/TLS certificate misconfigurations, missing defensive HTTP headers, and correlates community fraud reports in real time.
 
 ---
