@@ -22,9 +22,9 @@ router.post('/', optionalAuth, async (req, res) => {
       pythonResponse = await axios.post(`${PYTHON_API_URL}/analyze`, { url });
     } catch (pyErr) {
       const msg = pyErr.response?.data?.error || pyErr.message;
-      return res.status(502).json({ 
-        success: false, 
-        error: `Python Analysis Engine error: ${msg}. Make sure python_service is running on port 5001.` 
+      return res.status(502).json({
+        success: false,
+        error: 'Our security analysis service is temporarily unavailable or still starting up. Please wait a moment, refresh UnMasker, and try again. If the problem persists, visit https://unmasker-python.onrender.com to wake up the service, then return and retry your scan.'
       });
     }
 
